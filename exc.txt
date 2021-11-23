@@ -1,0 +1,46 @@
+excess Code
+
+
+
+#############
+newlist = os.listdir(r'/images/1.jpg')
+anotherList = []
+for x in newlist:
+    img = cv2.imread(f'/images/1.jpg/{x}')
+    anotherList.append(img)
+
+
+
+    truncatechars_html
+
+           <!doctype html>
+       <title>Upload new File</title>
+       <h1>Upload new File</h1>
+       <form method=post enctype=multipart/form-data>
+         <input type=file name=file>
+         <input type=submit value=Upload>
+        <input name="text">
+        <input type="submit">
+       </form>
+       <button onclick="bgblur()">background blur</button>
+        <button onclick="desat()">desaturate background</button>
+        <button onclick="transpar()">transparent background</button>
+        <button onclick="changebg()"> bg Change</button>
+        <script>
+            function bgblur() {
+  location.replace('/backblur')
+        } 
+        function desat() {
+            location.replace('/desature')
+        } 
+        function transpar() {
+            location.replace('/transparent')
+        } 
+        function changebg() {
+            location.replace('/changeback')
+        } 
+
+        
+        
+    </script>
+    

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="../static/styles/mainpage.css">
+</head>
+
+<body>
+    <header>
+        <div class="nav">
+            <ul>
+                <li><a href="./">Home</a></li>
+                <li><a href="./imagebg">Image Background Removal</a></li>
+                <li><a href="./realtime">RealTime Background Removal</a></li>
+                <li><a href="./trial.html">Trial</a></li>
+              </ul>
+          </div>
+    </header>
+    <h1>Image Background Remove </h1>
+    <form method=post enctype=multipart/form-data> 
+        <div class="byname"><input name="text">
+            <input class="btn1" type="submit"></div>
+            <div class="byadd">
+                <input type=file name=file>
+                <input class="btn1" type=submit value=Upload>
+            </div>
+       
+        
+    </form>
+    <div class="option">
+        <button class="btn" onclick="bgblur()">Background Blur</button>
+        <button class="btn" onclick="desat()">Desaturate Background</button>
+        <button class="btn" onclick="transpar()">Transparent Background</button>
+        <button class="btn" onclick="changebg()"> Background Change</button>
+    </div>
+
+    <script>
+        function bgblur() {
+            location.replace('/backblur')
+        }
+
+        function desat() {
+            location.replace('/desature')
+        }
+
+        function transpar() {
+            location.replace('/transparent')
+        }
+
+        function changebg() {
+            location.replace('/changeback')
+        }
+    </script>
+</body>
+
+</html>

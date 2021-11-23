@@ -1,0 +1,38 @@
+<html>
+<head>
+
+    <title>Live Stream</title>
+    <link rel="stylesheet" type="text/css" href="../static/styles/mainpage.css">
+</head>
+
+  <body>
+  <div class="nav">
+    <header>
+        <div class="nav">
+            <ul>
+                <li><a href="./">Home</a></li>
+                <li><a href="./imagebg">Image Background Removal</a></li>
+                <li><a href="./realtime">RealTime Background Removal</a></li>
+                <li><a href="./trial.html">Trial</a></li>
+              </ul>
+          </div>
+    </header>
+  </div>
+    <div class="container">
+        <div class="row">
+            <div style="color:blue"class="col-lg-8  offset-lg-2">
+                <h3 class="mt-5">Live Streaming</h3>
+                <img src="{{ url_for('xyz') }}" width="50%">
+            </div>
+        </div>
+    </div>
+    <!-- <form enctype = "multipart/form-data" action = "python_script.py" method = "post">
+    
+        <p>Upload File: <input type = "file" name = "filename" /></p>
+         
+            
+        <p><input type = "submit" value = "Upload" /></p> -->
+    </body>
+
+
+</html>

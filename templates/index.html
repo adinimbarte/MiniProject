@@ -1,0 +1,42 @@
+<html>
+    <head>
+
+        <title>Home</title>
+        <link rel="stylesheet" type="text/css" href="../static/styles/mainpage.css">
+    </head>
+    <body>
+
+        
+        <header>
+            <div class="nav">
+                <ul>
+                    <li><a href="./">Home</a></li>
+                    <li><a href="./imagebg">Image Background Removal</a></li>
+                    <li><a href="./realtime">RealTime Background Removal</a></li>
+                    <li><a href="./trial.html">Trial</a></li>
+                  </ul>
+              </div>
+        </header>
+        <h2  class="indexH">Redirect to a Webpage</h2>
+        <div class="info">To use realtime bg replacement click realtime bg removal , to change bg of an image click image bg changer</div>
+
+        <button class="btn" onclick="forvideo()">realtime bg removal</button>
+        <button class="btn" onclick="forimage()">image bg changer</button>
+
+            <script>
+            function forvideo() {
+  location.replace("/realtime")
+        } 
+        function forimage() {
+            location.replace("/imagebg")
+        } 
+
+        
+        
+    </script>
+
+    
+    
+    
+    </body>
+</html>
