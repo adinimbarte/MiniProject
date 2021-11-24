@@ -5,3 +5,12 @@ bgimg/3.jpg
 bgimg/4.jpg
 bgimg/5.jpg
 bgimg/6.jpg
+
+
+
+Paths for image
+image/2a.jpg
+image/2b.jpg
+image/2c.jpg
+image/2d.jpg
+image/vk.jpg
