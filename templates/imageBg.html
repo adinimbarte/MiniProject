@@ -12,23 +12,29 @@
         <div class="nav">
             <ul>
                 <li><a href="./">Home</a></li>
-                <li><a href="./imagebg">Image Background Removal</a></li>
+                <li><a href="./imageBg">Image Background Removal</a></li>
                 <li><a href="./realtime">RealTime Background Removal</a></li>
-                <li><a href="./trial.html">Trial</a></li>
               </ul>
           </div>
     </header>
     <h1>Image Background Remove </h1>
-    <form method=post enctype=multipart/form-data> 
+    <!-- <form action="/imageBg" method="POST,GET">
+    <label htmlFor="contained-button-file" className="file-upload ">
+        Choose Background
+        <input accept="image/*" id="contained-button-file" multiple type="file" name="newfile" />
+        <input type="submit" name= "form" />
+        
+      </label> -->
+    <!-- <form method=post enctype=multipart/form-data> 
         <div class="byname"><input name="text">
             <input class="btn1" type="submit"></div>
             <div class="byadd">
                 <input type=file name=file>
                 <input class="btn1" type=submit value=Upload>
-            </div>
+            </div> -->
        
         
-    </form>
+    <!-- </form> -->
     <div class="option">
         <button class="btn" onclick="bgblur()">Background Blur</button>
         <button class="btn" onclick="desat()">Desaturate Background</button>
@@ -37,6 +43,12 @@
     </div>
 
     <script>
+        function getName(){
+        var filename = document.getElementsByName("newfile");
+        console.log(document.getElementsByName("newfile"));
+        
+        }
+        
         function bgblur() {
             location.replace('/backblur')
         }

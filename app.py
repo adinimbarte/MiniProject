@@ -1,5 +1,5 @@
 from re import template
-from flask import Flask,redirect,url_for,render_template,request,Response, flash
+from flask import Flask,flash,redirect,url_for,render_template,request,Response, flash
 import os
 import cv2
 import numpy as np
@@ -9,6 +9,11 @@ from werkzeug.utils import secure_filename
 import cvzone
 from cvzone.SelfiSegmentationModule import SelfiSegmentation
 from time import time
+import cgi, os
+import cgitb; cgitb.enable()
+import random
+
+UPLOAD_FOLDER = 'static/bgimg/'
 # Initializing mediapipe segmentation class.
 mp_selfie_segmentation = mp.solutions.selfie_segmentation
 
@@ -52,7 +57,7 @@ def modifyBackground(image, background_image=255, blur=95, threshold=0.3, displa
         # Create an output image with the pixel values from the original sample image at the indexes where the mask have
         # value 1 and replace the other pixel values (where mask have zero) with the new background image.
         output_image = np.where(binary_mask_3, image, background_image)
-        cv2.imwrite(r'newimg.png', output_image)
+        cv2.imwrite(r'output\output.png', output_image)
 
     elif method == 'blurBackground':
 
@@ -62,7 +67,7 @@ def modifyBackground(image, background_image=255, blur=95, threshold=0.3, displa
         # Create an output image with the pixel values from the original sample image at the indexes where the mask have
         # value 1 and replace the other pixel values (where mask have zero) with the new background image.
         output_image = np.where(binary_mask_3, image, blurred_image)
-        cv2.imwrite(r'newimg1.png', output_image)
+        cv2.imwrite(r'output\output.png', output_image)
 
     elif method == 'desatureBackground':
 
@@ -102,7 +107,7 @@ def modifyBackground(image, background_image=255, blur=95, threshold=0.3, displa
         # plt.title("Original Image");
         # plt.axis('off');
         # plt.subplot(122);
-        plt.imshow(output_image);
+        plt.imshow(output_image[:, :, ::-1]);
         plt.title("Output Image");
         plt.axis('off');
         plt.show()
@@ -125,7 +130,7 @@ def realtime_bgremoval():
     cam.set(cv2.CAP_PROP_FPS, 60)
     segmentor = SelfiSegmentation()  # defining the segmentation model default=1 for landscape mode
     fps = cvzone.FPS()
-    imagebg = cv2.imread("bgimg/1.jpg")
+    imagebg = cv2.imread("bgimg/2.jpg")
     # standard loop for webcam access
     listImg = os.listdir('bgimg')
     print(listImg)
@@ -134,10 +139,21 @@ def realtime_bgremoval():
         img = cv2.imread(f'bgimg/{x}')
         imgList.append(img)
     print(len(imgList))
-    imageindex = 0
+    
+    
+    
+    
+    
+    
+    ############===>>>>> to change images
+    imageindex=2
+    # list2=[1, 2, 3, 4, 5, 6]
+    # imageindex = random.choice(list2)
     while (True):
         success, image = cam.read()
         frame = segmentor.removeBG(image, imgList[imageindex], threshold=0.7)  # this variable to get the output
+        
+    
 
         ret, buffer = cv2.imencode('.jpg', frame)
         frame = buffer.tobytes()
@@ -162,17 +178,6 @@ def realtime_bgremoval():
 
 
 app=Flask(__name__)
-
-#fileupld
-UPLOAD_FOLDER = r'bgimg'
-ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-
-
 @app.route('/')
 def welcome():
     return render_template('index.html')
@@ -183,49 +188,96 @@ def xy():
 @app.route('/xyz')
 def xyz():
     return Response(realtime_bgremoval(), mimetype='multipart/x-mixed-replace; boundary=frame')
-@app.route('/imagebg', methods=['GET', 'POST'])
-def upload_file():
-    if request.method == 'POST':
-        # check if the post request has the file part
-        if 'file' not in request.files:
-            flash('No file part')
-            return redirect('/imagebg')
-        file = request.files['file']
-        # if user does not select file, browser also
-        # submit a empty part without filename
-        if file.filename == '':
-            flash('No selected file')
-            return redirect('/imagebg')
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        text = request.form['text']
-        processed_text = text
-
-
-    return render_template('imageBg.html')
+# new code#############################
+# form = cgi.FieldStorage()
+@app.route('/imageBg')
+def upload_form():
+	return render_template('imageBg.html')    
+@app.route('/imageBg<filename>', methods=['GET','POST'])
+def fileUpload():
+    if request.method == "POST":
+        filename = request.form.get["newfile"]
+        print(filename,"\n \n \n")
+        return render_template('imageBg.html',filename=filename)
+    
+    # if 'file' not in request.files:
+    #     flash('No file part')
+    #     file = request.files['filename']
+    #     return render_template('imageBg.html',file)
+    # file = request.files['file']
+    # if file.filename == '':
+    #     flash('No image selected for uploading')
+    #     return render_template('imageBg.html',file)
+    # if file.filename.len>"2":
+    #     filename = secure_filename(file.filename)
+    #     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    #     #print('upload_image filename: ' + filename)
+    #     flash('Image successfully uploaded and displayed below')
+    #     return render_template('imageBg.html',file)
+    # else:
+    #     flash('Allowed image types are -> png, jpg, jpeg, gif')
+    # return render_template('imageBg.html',file)
+    
+################################### 
+# for background
+bgImg = os.listdir('bgimg')
+#for image
+editImg = os.listdir('image')
+listl=['image/vk.jpg','image/image1.jpg']
+y=random.choice(editImg)    
 @app.route('/backblur')
 def blur():
-    image_to_process='flask img/elonbg.jpg'
+    image_to_process=cv2.imread(r'image/vk.jpg')
+     #image_to_process =cv2.imread(r'image/2a.jpg')
+    #image_to_process =cv2.imread(r'image/2b.jpg')
+     #image_to_process =cv2.imread(r'image/2c.jpg')
+     #image_to_process =cv2.imread(r'image/2d.jpg')
+      #image_to_process =cv2.imread(r'image/image1.jpg')
 
     modifyBackground(image_to_process, method='blurBackground')
-    return'image saved'
+    return render_template('imageBg.html')
 @app.route('/desature')
 def desature():
-    image_to_process = anotherList[0]
+    image_to_process=cv2.imread(r'image/vk.jpg')
+     #image_to_process =cv2.imread(r'image/2a.jpg')
+    #image_to_process =cv2.imread(r'image/2b.jpg')
+     #image_to_process =cv2.imread(r'image/2c.jpg')
+     #image_to_process =cv2.imread(r'image/2d.jpg')
+      #image_to_process =cv2.imread(r'image/image1.jpg')
     modifyBackground(image_to_process, method='desatureBackground')
-    return image-image_to_process
+    return render_template('imageBg.html')
 @app.route('/transparent')
 def trans():
-    image_to_process = anotherList[0]
+    image_to_process=cv2.imread(r'image/vk.jpg')
+     #image_to_process =cv2.imread(r'image/2a.jpg')
+    #image_to_process =cv2.imread(r'image/2b.jpg')
+     #image_to_process =cv2.imread(r'image/2c.jpg')
+     #image_to_process =cv2.imread(r'image/2d.jpg')
+      #image_to_process =cv2.imread(r'image/image1.jpg')
+       #image_to_process =cv2.imread(r'image/vk.jpg')
     modifyBackground(image_to_process, method='transparentBackground')
-    return 'ok'
+    return render_template('imageBg.html')
 @app.route('/changeback')
 def change():
-    image_to_process = anotherList[0]
-    bg_image='1.jpg'
+    image_to_process =cv2.imread(r'image/vk.jpg')
+    #image_to_process =cv2.imread(r'image/2a.jpg')
+    #image_to_process =cv2.imread(r'image/2b.jpg')
+     #image_to_process =cv2.imread(r'image/2c.jpg')
+     #image_to_process =cv2.imread(r'image/2d.jpg')
+      #image_to_process =cv2.imread(r'image/image1.jpg')
+       #image_to_process =cv2.imread(r'image/vk.jpg')
+       
+    bg_image=cv2.imread(r'bgimg/5.jpg')   
+    ######## Background
+     #bg_image =cv2.imread(r'bgimg/1.jpg')
+      #bg_image =cv2.imread(r'bgimg/2.jpg')
+       #bg_image =cv2.imread(r'bgimg/4.jpg')
+        #bg_image =cv2.imread(r'bgimg/6.jpg')
+     
+       
+    
     modifyBackground(image_to_process, bg_image, 0.7, method='changeBackground')
-    return 'ok'
+    return render_template('imageBg.html')
 
 
 
