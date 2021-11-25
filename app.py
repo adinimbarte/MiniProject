@@ -227,52 +227,50 @@ listl=['image/vk.jpg','image/image1.jpg']
 y=random.choice(editImg)    
 @app.route('/backblur')
 def blur():
-    image_to_process=cv2.imread(r'image/vk.jpg')
-     #image_to_process =cv2.imread(r'image/2a.jpg')
-    #image_to_process =cv2.imread(r'image/2b.jpg')
-     #image_to_process =cv2.imread(r'image/2c.jpg')
-     #image_to_process =cv2.imread(r'image/2d.jpg')
-      #image_to_process =cv2.imread(r'image/image1.jpg')
+    image_to_process =cv2.imread(r'image/2b.jpg')
+    
+    #image_to_process =cv2.imread(r'image/2c.jpg')
+    #image_to_process =cv2.imread(r'image/2d.jpg')
+    #image_to_process =cv2.imread(r'image/image1.jpg')
 
     modifyBackground(image_to_process, method='blurBackground')
     return render_template('imageBg.html')
 @app.route('/desature')
 def desature():
-    image_to_process=cv2.imread(r'image/vk.jpg')
-     #image_to_process =cv2.imread(r'image/2a.jpg')
-    #image_to_process =cv2.imread(r'image/2b.jpg')
-     #image_to_process =cv2.imread(r'image/2c.jpg')
-     #image_to_process =cv2.imread(r'image/2d.jpg')
-      #image_to_process =cv2.imread(r'image/image1.jpg')
+    
+    image_to_process =cv2.imread(r'image/2b.jpg')
+    #image_to_process =cv2.imread(r'image/2c.jpg')
+    #image_to_process =cv2.imread(r'image/2d.jpg')
+    #image_to_process =cv2.imread(r'image/image1.jpg')
+    #image_to_process =cv2.imread(r'image/2a.jpg')
     modifyBackground(image_to_process, method='desatureBackground')
     return render_template('imageBg.html')
 @app.route('/transparent')
 def trans():
-    image_to_process=cv2.imread(r'image/vk.jpg')
-     #image_to_process =cv2.imread(r'image/2a.jpg')
-    #image_to_process =cv2.imread(r'image/2b.jpg')
-     #image_to_process =cv2.imread(r'image/2c.jpg')
-     #image_to_process =cv2.imread(r'image/2d.jpg')
-      #image_to_process =cv2.imread(r'image/image1.jpg')
-       #image_to_process =cv2.imread(r'image/vk.jpg')
+    image_to_process =cv2.imread(r'image/2b.jpg')
+    #image_to_process =cv2.imread(r'image/2a.jpg')
+
+    #image_to_process =cv2.imread(r'image/2c.jpg')
+    #image_to_process =cv2.imread(r'image/2d.jpg')
+    #image_to_process =cv2.imread(r'image/image1.jpg')
     modifyBackground(image_to_process, method='transparentBackground')
     return render_template('imageBg.html')
 @app.route('/changeback')
 def change():
-    image_to_process =cv2.imread(r'image/vk.jpg')
+    image_to_process =cv2.imread(r'image/2b.jpg')
+    
+    
     #image_to_process =cv2.imread(r'image/2a.jpg')
-    #image_to_process =cv2.imread(r'image/2b.jpg')
-     #image_to_process =cv2.imread(r'image/2c.jpg')
-     #image_to_process =cv2.imread(r'image/2d.jpg')
-      #image_to_process =cv2.imread(r'image/image1.jpg')
-       #image_to_process =cv2.imread(r'image/vk.jpg')
+    #image_to_process =cv2.imread(r'image/2c.jpg')
+    #image_to_process =cv2.imread(r'image/2d.jpg')
+    #image_to_process =cv2.imread(r'image/image1.jpg')
        
     bg_image=cv2.imread(r'bgimg/5.jpg')   
     ######## Background
-     #bg_image =cv2.imread(r'bgimg/1.jpg')
-      #bg_image =cv2.imread(r'bgimg/2.jpg')
-       #bg_image =cv2.imread(r'bgimg/4.jpg')
-        #bg_image =cv2.imread(r'bgimg/6.jpg')
+    #bg_image =cv2.imread(r'bgimg/1.jpg')
+    #bg_image =cv2.imread(r'bgimg/2.jpg')
+    #bg_image =cv2.imread(r'bgimg/4.jpg')
+    #bg_image =cv2.imread(r'bgimg/6.jpg')
      
        
     

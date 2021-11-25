@@ -9,8 +9,8 @@ bgimg/6.jpg
 
 
 Paths for image
-image/2a.jpg
-image/2b.jpg
-image/2c.jpg
-image/2d.jpg
-image/vk.jpg
+image/2a.jpg  {% comment %} dog {% endcomment %}
+image/2b.jpg    {% comment %} Guy Working on Pc {% endcomment %}
+image/2c.jpg    {% comment %} A woman {% endcomment %}
+image/2d.jpg    {% comment %} Elon Musk {% endcomment %}
+image/vk.jpg    {% comment %} Virat kohli {% endcomment %}
