@@ -238,8 +238,8 @@ def blur():
 @app.route('/desature')
 def desature():
     
-    image_to_process =cv2.imread(r'image/2b.jpg')
-    #image_to_process =cv2.imread(r'image/2c.jpg')
+    #image_to_process =cv2.imread(r'image/2b.jpg')
+    image_to_process =cv2.imread(r'image/2c.jpg')
     #image_to_process =cv2.imread(r'image/2d.jpg')
     #image_to_process =cv2.imread(r'image/image1.jpg')
     #image_to_process =cv2.imread(r'image/2a.jpg')
@@ -265,7 +265,7 @@ def change():
     #image_to_process =cv2.imread(r'image/2d.jpg')
     #image_to_process =cv2.imread(r'image/image1.jpg')
        
-    bg_image=cv2.imread(r'bgimg/5.jpg')   
+    bg_image=cv2.imread(r'bgimg/6.jpg')   
     ######## Background
     #bg_image =cv2.imread(r'bgimg/1.jpg')
     #bg_image =cv2.imread(r'bgimg/2.jpg')

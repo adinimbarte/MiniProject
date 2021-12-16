@@ -98,18 +98,29 @@ def modifyBackground(image, background_image=255, blur=95, threshold=0.3, displa
 
     # Check if the original input image and the resultant image are specified to be displayed.
     if display:
+        plt.figure(figsize=[22,22])
+        plt.subplot(121);plt.imshow(image[:,:,::-1]);plt.title("Original Image");plt.axis('off');
+        plt.subplot(122);plt.imshow(output_image[:,:,::-1]);plt.title("Output Image");plt.axis('off');
+
+##### newly added code
 
         # Display the original input image and the resultant image.
-        plt.figure(figsize=[22, 22])
+        
+        
+        # plt.figure(figsize=[22, 22])
+        
         # plt.subplot(121);
         # plt.imshow(image[:, :, ::-1]);
         # plt.title("Original Image");
         # plt.axis('off');
         # plt.subplot(122);
-        plt.imshow(output_image[:, :, ::-1]);
-        plt.title("Output Image");
-        plt.axis('off');
+        
+        
+        # plt.imshow(output_image[:, :, ::-1]);
+        # plt.title("Output Image");
+        # plt.axis('off');
         plt.show()
+        
 
     # Otherwise
     else:
@@ -142,7 +153,7 @@ def realtime_bgremoval():
 
         combined = cvzone.stackImages([image, imageout], 2, 1)
         _, combined = fps.update(combined, color=(0, 0, 255))
-        cv2.imshow("live", image)
+        cv2.imshow("live", combined)
         cv2.imshow("liveout", imageout)
         key = cv2.waitKey(1)
         if key == ord('p'):
@@ -162,13 +173,13 @@ if user_choice=='1':
     x ='changeBackground'
     y ='blurBackground'
     z ='desatureBackground'
-    c ='transparentBackground'
+    # c ='transparentBackground'
 
     print('paste path of image')
     path_of_image=input()
 
     image_to_process=cv2.imread(path_of_image)
-    print('chose type of action \n x:changeBackground \n y:blurBackground \n z:desatureBackground \n c:transparentBackground')
+    print('chose type of action \n x:changeBackground \n y:blurBackground \n z:desatureBackground \n ')
     to_do = input()
     if to_do=='x':
         print('paste path of bgimage')
@@ -183,8 +194,8 @@ if user_choice=='1':
     elif to_do == 'z':
         modifyBackground(image_to_process, method='desatureBackground')
 
-    elif to_do == 'c':
-        modifyBackground(image_to_process, method='transparentBackground')
+    # elif to_do == 'c':
+    #     modifyBackground(image_to_process, method='transparentBackground')
     else:
         print('invalid input')
 
